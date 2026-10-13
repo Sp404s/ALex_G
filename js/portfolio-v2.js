@@ -192,7 +192,7 @@
 
   class MobilePortfolioMenu extends HTMLElement {
     connectedCallback() {
-      const positions = [['0px', '-74px'], ['-24px', '-132px'], ['-52px', '-184px'], ['-30px', '-242px']];
+      const positions = [['0px', '-74px'], ['24px', '-132px'], ['52px', '-184px'], ['30px', '-242px']];
       this.innerHTML = `
         <nav class="mobile-menu" aria-label="Мобильная навигация">
           <div class="mobile-menu__backdrop" data-menu-close></div>
@@ -268,8 +268,6 @@
           <div class="portfolio-footer__lead">
             <div>
               <div class="section-heading"><h2>Контакты</h2></div>
-              <h2>Создадим что-то ясное и сильное.</h2>
-              <p>Расскажите о задаче — отвечу, задам необходимые вопросы и предложу следующий шаг.</p>
             </div>
             <div class="portfolio-footer__links">
               <a class="contact-link" href="mailto:0Alex0G0@gmail.com"><span>Email</span><strong>0Alex0G0@gmail.com</strong></a>
@@ -311,7 +309,7 @@
     const loader = document.querySelector('[data-site-loader]');
     if (!loader) return;
     const startedAt = performance.now();
-    const minimumDuration = reduceMotion ? 120 : 1250;
+    const minimumDuration = reduceMotion ? 120 : 1500;
     const hide = () => {
       const delay = Math.max(0, minimumDuration - (performance.now() - startedAt));
       window.setTimeout(() => {
@@ -322,6 +320,20 @@
     };
     if (document.readyState === 'complete') hide();
     else window.addEventListener('load', hide, { once: true });
+  }
+
+  function initMobileViewportInsets() {
+    const viewport = window.visualViewport;
+    const update = () => {
+      const bottomInset = viewport
+        ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop)
+        : 0;
+      document.documentElement.style.setProperty('--visual-viewport-bottom', `${Math.round(bottomInset)}px`);
+    };
+    update();
+    viewport?.addEventListener('resize', update, { passive: true });
+    viewport?.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('orientationchange', update, { passive: true });
   }
 
   function initFilters() {
@@ -601,6 +613,7 @@
   }
 
   initSiteLoader();
+  initMobileViewportInsets();
   initFilters();
   initModal();
   initMobileMenu();
