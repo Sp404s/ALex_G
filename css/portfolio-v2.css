@@ -1001,7 +1001,7 @@ img, video { display: block; max-width: 100%; }
     border: 1px solid #353535;
     border-radius: 50%;
     background: rgba(8, 8, 8, .92);
-    color: var(--text);
+    color: var(--accent);
     backdrop-filter: blur(14px);
   }
   .mobile-menu__toggle {
