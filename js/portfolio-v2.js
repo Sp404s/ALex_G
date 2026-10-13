@@ -194,7 +194,7 @@
     connectedCallback() {
       const positions = [['0px', '-74px'], ['24px', '-132px'], ['52px', '-184px'], ['30px', '-242px']];
       this.innerHTML = `
-        <nav class="mobile-menu" aria-label="Мобильная навигация">
+        <nav class="mobile-menu${onHomePage ? ' is-hero-gated' : ' is-after-hero'}" aria-label="Мобильная навигация"${onHomePage ? ' aria-hidden="true"' : ''}>
           <div class="mobile-menu__backdrop" data-menu-close></div>
           ${navItems.map((item, index) => `
             <a class="mobile-menu__link" href="${item.href}" style="--i:${index};--x:${positions[index][0]};--y:${positions[index][1]}" aria-label="${item.label}">
@@ -320,20 +320,6 @@
     };
     if (document.readyState === 'complete') hide();
     else window.addEventListener('load', hide, { once: true });
-  }
-
-  function initMobileViewportInsets() {
-    const viewport = window.visualViewport;
-    const update = () => {
-      const bottomInset = viewport
-        ? Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop)
-        : 0;
-      document.documentElement.style.setProperty('--visual-viewport-bottom', `${Math.round(bottomInset)}px`);
-    };
-    update();
-    viewport?.addEventListener('resize', update, { passive: true });
-    viewport?.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('orientationchange', update, { passive: true });
   }
 
   function initFilters() {
@@ -479,12 +465,46 @@
     const menu = document.querySelector('.mobile-menu');
     const toggle = menu?.querySelector('.mobile-menu__toggle');
     if (!menu || !toggle) return;
+    const links = Array.from(menu.querySelectorAll('.mobile-menu__link'));
     const setOpen = open => {
       menu.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
       document.body.classList.toggle('is-menu-open', open);
     };
+    const setVisible = visible => {
+      menu.classList.toggle('is-after-hero', visible);
+      menu.setAttribute('aria-hidden', String(!visible));
+      toggle.tabIndex = visible ? 0 : -1;
+      links.forEach(link => { link.tabIndex = visible ? 0 : -1; });
+      if (!visible) setOpen(false);
+    };
+
+    if (menu.classList.contains('is-hero-gated')) {
+      const hero = document.querySelector('.hero');
+      let frame = 0;
+      let heroEnd = 0;
+      const measure = () => {
+        heroEnd = hero ? hero.offsetTop + hero.offsetHeight : 0;
+      };
+      const updateVisibility = () => {
+        frame = 0;
+        setVisible(window.scrollY >= heroEnd - 1);
+      };
+      const scheduleVisibilityUpdate = () => {
+        if (!frame) frame = requestAnimationFrame(updateVisibility);
+      };
+      measure();
+      updateVisibility();
+      window.addEventListener('scroll', scheduleVisibilityUpdate, { passive: true });
+      window.addEventListener('resize', () => {
+        measure();
+        scheduleVisibilityUpdate();
+      }, { passive: true });
+    } else {
+      setVisible(true);
+    }
+
     toggle.addEventListener('click', () => setOpen(!menu.classList.contains('is-open')));
     menu.addEventListener('click', event => {
       if (event.target.closest('a') || event.target.closest('[data-menu-close]')) setOpen(false);
@@ -613,7 +633,6 @@
   }
 
   initSiteLoader();
-  initMobileViewportInsets();
   initFilters();
   initModal();
   initMobileMenu();

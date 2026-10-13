@@ -32,7 +32,6 @@
   --inactive: #666;
   --line: #292929;
   --accent: #f56036;
-  --visual-viewport-bottom: 0px;
   --sidebar: 64px;
   --page-pad: clamp(20px, 3.2vw, 52px);
   --section-gap: clamp(64px, 8vw, 112px);
@@ -976,10 +975,21 @@ img, video { display: block; max-width: 100%; }
     z-index: 220;
     left: max(16px, env(safe-area-inset-left));
     right: auto;
-    bottom: calc(max(16px, env(safe-area-inset-bottom)) + var(--visual-viewport-bottom));
+    bottom: max(16px, env(safe-area-inset-bottom));
     display: block;
     width: 56px;
     height: 56px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateZ(0);
+    transition: opacity 220ms ease, visibility 0s linear;
+    will-change: opacity;
+  }
+  .mobile-menu.is-hero-gated:not(.is-after-hero) {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 180ms ease, visibility 0s linear 180ms;
   }
   .mobile-menu__toggle,
   .mobile-menu__link {
