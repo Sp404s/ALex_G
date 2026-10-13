@@ -164,6 +164,12 @@
     contacts: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="m4.5 7 7.5 6 7.5-6"/></svg>'
   };
 
+  const messengerIcons = {
+    telegram: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.5 3.5 18.2 20c-.25 1.17-.95 1.46-1.93.91l-5.03-3.71-2.43 2.33c-.27.27-.5.5-1.02.5l.36-5.13L17.5 6.45c.41-.36-.09-.56-.64-.2L5.3 13.53.33 11.98c-1.08-.34-1.1-1.08.23-1.6L19.98 2.9c.9-.33 1.69.2 1.52.6Z"/></svg>',
+    vk: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 17.4h1.7c.5 0 .7-.3.7-.7v-1.5c0-.5.2-.6.4-.6.3 0 .8.5 1.9 1.6 1 1 1.2 1.2 1.8 1.2h2.3c.7 0 1-.3.8-.8-.2-.7-1.6-2.1-2.4-2.9-.4-.4-.5-.6-.1-1.1.7-.9 1.8-2.6 2.2-3.6.3-.7 0-1-.7-1h-2.1c-.5 0-.7.3-.9.7-.4 1.1-1.2 2.8-2.1 3.8-.4.4-.6.5-.8.5-.3 0-.4-.5-.4-1.1V8.9c0-.7-.2-.9-.7-1H11c-.4 0-.7.3-.7.5 0 .6.9.7 1 2.2v1.7c0 .4-.1.7-.4.7-.7 0-2.3-2.4-3.3-4.2-.2-.5-.5-.7-1-.7H4.5c-.6 0-.8.3-.6.8 1.1 2.6 3.3 6.3 6.4 8 .8.4 1.5.5 2.3.5Z"/></svg>',
+    max: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 22c-2.1 0-3.1-.3-4.8-1.6-1.1 1.4-4.5 2.5-4.7.6 0-1.4-.3-2.6-.7-3.9-.4-1.6-.9-3.4-.9-6C1.1 5 6.1.4 12 .4s10.6 4.8 10.6 10.8S17.9 22 12.2 22Zm.1-16.2c-2.8-.1-5 1.8-5.5 4.9-.4 2.5.3 5.6.9 5.8.3.1 1-.5 1.5-1 1 .7 2.1 1.1 3.3 1.1a5.4 5.4 0 0 0 5.6-5 5.4 5.4 0 0 0-5.8-5.8Z"/></svg>'
+  };
+
   const onAboutPage = document.body.classList.contains('about-route');
   const onHomePage = document.body.classList.contains('home-route');
   const navItems = [
@@ -272,8 +278,9 @@
             <div class="portfolio-footer__links">
               <a class="contact-link" href="mailto:0Alex0G0@gmail.com"><span>Email</span><strong>0Alex0G0@gmail.com</strong></a>
               <a class="contact-link" href="tel:+79818081622"><span>Телефон</span><strong>+7 981 808-16-22</strong></a>
-              <a class="contact-link" href="https://t.me/Alex_G8" target="_blank" rel="noopener noreferrer"><span>Telegram</span><strong>@Alex_G8</strong></a>
-              <a class="contact-link" href="https://vk.com/3funnydays" target="_blank" rel="noopener noreferrer"><span>VK</span><strong>3funnydays</strong></a>
+              <a class="contact-link contact-link--messenger" href="https://t.me/Alex_G8" target="_blank" rel="noopener noreferrer"><span class="contact-link__service">${messengerIcons.telegram}<span>Telegram</span></span><strong>@Alex_G8</strong></a>
+              <a class="contact-link contact-link--messenger" href="https://vk.com/3funnydays" target="_blank" rel="noopener noreferrer"><span class="contact-link__service">${messengerIcons.vk}<span>VK</span></span><strong>@3funnydays</strong></a>
+              <a class="contact-link contact-link--messenger" href="https://max.ru/u/f9LHodD0cOIdKGB-iRSazrJC6eCs_UOfaSvblLMYAgu22i5o3yP99U8vpuU" target="_blank" rel="noopener noreferrer"><span class="contact-link__service">${messengerIcons.max}<span>MAX</span></span><strong>Александр Гусев</strong></a>
             </div>
           </div>
           <div class="portfolio-footer__bottom">

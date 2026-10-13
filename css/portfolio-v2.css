@@ -636,6 +636,9 @@ img, video { display: block; max-width: 100%; }
 .contact-link span { color: var(--inactive); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
 .contact-link strong { font-size: 13px; font-weight: 400; overflow-wrap: anywhere; }
 .contact-link:hover { color: var(--muted); }
+.contact-link__service { display: inline-flex; align-items: center; gap: 9px; }
+.contact-link__service svg { width: 18px; height: 18px; flex: 0 0 auto; fill: currentColor; color: var(--accent); }
+.contact-link--messenger:hover .contact-link__service svg { color: var(--text); }
 
 .portfolio-footer__bottom {
   display: flex;
