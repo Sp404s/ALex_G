@@ -210,7 +210,7 @@
       this.innerHTML = `
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero__media" aria-hidden="true">
-            <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="img/decor/hero-poster.webp">
+            <video class="hero__video" autoplay muted loop playsinline preload="metadata">
               <source src="img/decor/hero-goose.webm" type="video/webm">
             </video>
           </div>
