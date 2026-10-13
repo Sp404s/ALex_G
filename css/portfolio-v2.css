@@ -1033,6 +1033,9 @@ img, video { display: block; max-width: 100%; }
     opacity: 0;
     transform: translate(var(--x), 0) scale(.72);
     pointer-events: none;
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--text);
     transition: transform 260ms var(--ease), opacity 180ms ease;
     transition-delay: calc(var(--i) * 25ms);
   }
